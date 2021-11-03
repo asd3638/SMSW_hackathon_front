@@ -12,10 +12,10 @@ function LoginModal({ show, closeLoginModal }) {
         </Modal.Header>
         <Modal.Body>
           <div className="login_btn">
-            <a href="http://http://ec2-18-218-203-237.us-east-2.compute.amazonaws.com:8080/auth/google">
+            <a href="http://ec2-18-218-203-237.us-east-2.compute.amazonaws.com:8080/auth/google">
               <img src={GoogleLoginImg} alt="googleImg" className="google" />
             </a>
-            <a href="http://http://ec2-18-218-203-237.us-east-2.compute.amazonaws.com:8080/auth/kakao">
+            <a href="http://ec2-18-218-203-237.us-east-2.compute.amazonaws.com:8080/auth/kakao">
               <img src={KakaoLoginImg} alt="kakakoImg" className="kakao" />
             </a>
           </div>
