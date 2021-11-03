@@ -12,9 +12,8 @@ export default function (SpecificComponent, option, adminRoute = null) {
 
     // 여기선 막아서 다른 페이지로 들어가게 한다.
     useEffect(() => {
-      console.log(props);
       // 서버에 요청 보내서 지금 페이지에 들어가려는 사람의 로그인 정보나 role등을 확인할 수 있다.
-      dispatch(auth()).then((response) => {
+      dispatch(auth(props)).then((response) => {
         console.log(response);
         //로그인 하지 않은 상태
         if (!response.payload.isAuth) {

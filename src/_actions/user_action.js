@@ -23,10 +23,9 @@ export function registerUser(dataToSubmit) {
 }
 
 export function auth(props) {
-  console.log(props);
-
+  console.log("auth안" + props.location.search);
   const request = axios
-    .get("/api/users/auth")
+    .get("/api/users/register", props.location.search)
     .then((response) => response.data);
 
   return {
