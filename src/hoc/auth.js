@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import auth from "../_actions/user_action";
+import queryString from "query-string";
 
 export default function (SpecificComponent, option, adminRoute = null) {
   //null    =>  아무나 출입이 가능한 페이지
@@ -9,8 +10,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
   //false   =>  로그인한 유저는 출입 불가능한 페이지
   function AuthenticationCheck(props) {
     try {
-      console.log(props.location.search.get("accessToken"));
-      const token = props.location.search.get("accessToken");
+      const token = queryString.parse(props.location.search).accessToken;
       localStorage.setItem("token", token);
     } catch (error) {}
     const dispatch = useDispatch();
