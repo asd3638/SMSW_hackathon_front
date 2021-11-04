@@ -5,7 +5,7 @@ function auth() {
   //최초로 로그인 시도한 경오
   //로그인 안 한 유저가 접속 한 경우
   const request = instance
-    .get("/api/user", localStorage.getItem("token"))
+    .get("/auth/api/user", localStorage.getItem("token"))
     .then((response) => response.data);
 
   return {
