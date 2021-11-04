@@ -1,27 +1,11 @@
 import axios from "axios";
-import { LOGIN_USER, REGISTER_USER, AUTH_USER } from "./types";
+import { AUTH_USER } from "./types";
 
-export function registerUser(dataToSubmit) {
+function auth_check() {
+  //최초로 로그인 시도한 경오
+  //로그인 안 한 유저가 접속 한 경우
   const request = axios
-    .post("/api/users/register", dataToSubmit)
-    .then((response) => response.data);
-
-  return {
-    type: REGISTER_USER,
-    payload: request,
-  };
-}
-
-export function auth(props) {
-  console.log(
-    "auth안" +
-      props.location.search.substring(
-        props.location.search.lastIndexOf("?"),
-        props.location.search.lastIndexOf("/") + 1
-      )
-  );
-  const request = axios
-    .get("/api/users/register", props.location.search)
+    .get("/api/users/register", localStorage.getItem("token"))
     .then((response) => response.data);
 
   return {
@@ -29,3 +13,5 @@ export function auth(props) {
     payload: request,
   };
 }
+
+export default auth_check;
