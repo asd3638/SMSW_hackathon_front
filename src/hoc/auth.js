@@ -9,7 +9,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
   //false   =>  로그인한 유저는 출입 불가능한 페이지
   function AuthenticationCheck(props) {
     try {
-      console.log(props);
+      console.log(props.location.search.get("accessToken"));
       const token = props.location.search.get("accessToken");
       localStorage.setItem("token", token);
     } catch (error) {}
