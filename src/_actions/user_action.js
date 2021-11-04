@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AUTH_USER } from "./types";
 
-function auth_check() {
+function auth() {
   //최초로 로그인 시도한 경오
   //로그인 안 한 유저가 접속 한 경우
   const request = axios
@@ -14,4 +14,4 @@ function auth_check() {
   };
 }
 
-export default auth_check;
+export default auth;
