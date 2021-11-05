@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import LoginModal from "./LoginModal";
-function Header() {
+import instance from "../lib/api/instance";
+import { useHistory } from "react-router";
+
+function Header(props) {
+  const user = useSelector((state) => state.user.userData);
+  const token = localStorage.getItem("token");
+  const history = useHistory();
+
   const [show, setShow] = useState(false);
+  const [currentUser, setCurrentUser] = useState();
+  useEffect(() => {
+    if (user !== undefined) {
+      setCurrentUser(user);
+    }
+  }, [user]);
 
   const showLoginModal = () => {
     setShow(true);
@@ -10,6 +24,27 @@ function Header() {
   const closeLoginModal = () => {
     setShow(false);
   };
+  const logout = async () => {
+    const response = await instance
+      .get(`/api/user/logout/${token}`)
+      .then((response) => response.data);
+    localStorage.removeItem("token");
+    window.location.replace("/");
+  };
+
+  const loginBtn = (
+    <Nav.Link href="#" onClick={showLoginModal}>
+      로그인
+    </Nav.Link>
+  );
+  const logoutBtn = (
+    <Nav.Link href="#" onClick={logout}>
+      로그아웃
+    </Nav.Link>
+  );
+  const check = (
+    <NavDropdown.Item href="#action/3.4">드롭다운페이지4</NavDropdown.Item>
+  );
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -30,17 +65,9 @@ function Header() {
                 <NavDropdown.Item href="#action/3.3">
                   드롭다운페이지3
                 </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  드롭다운페이지4
-                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Nav>
-              <Nav.Link href="#" onClick={showLoginModal}>
-                로그인
-              </Nav.Link>
-            </Nav>
+            <Nav>{currentUser ? logoutBtn : loginBtn}</Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>

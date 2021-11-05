@@ -16,10 +16,9 @@ export default function () {
     // 여기선 막아서 다른 페이지로 들어가게 한다.
     useEffect(() => {
       // 서버에 요청 보내서 지금 페이지에 들어가려는 사람의 로그인 정보나 role등을 확인할 수 있다.
-      dispatch(Auth(token)).then((response) => {
-        console.log(response);
-      });
+      dispatch(Auth(token)).then((response) => {});
     }, [dispatch, props.history]);
+    window.location.replace("/");
     return <HomePage />;
   }
   return Login;
