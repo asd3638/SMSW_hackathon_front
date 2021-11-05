@@ -3,6 +3,7 @@ import HomePage from "./components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import auth from "./hoc/auth";
+import login from "./hoc/login";
 
 //in-folder component
 
@@ -12,6 +13,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={auth(HomePage, null)} />
+          <Route exact path="/login" component={login()} />
         </Switch>
       </BrowserRouter>
     </div>

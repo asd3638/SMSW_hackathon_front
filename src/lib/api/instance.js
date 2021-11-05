@@ -2,7 +2,9 @@ import axios from "axios";
 
 const instance = axios.create();
 
-instance.defaults.baseURL =
-  "http://ec2-18-218-203-237.us-east-2.compute.amazonaws.com:8080/";
+instance.defaults.baseURL = "http://localhost:8080/";
+instance.defaults.withCredentials = false;
+instance.defaults.headers["Accesss-Control-Allow-Origin"] = "*";
+instance.defaults.headers["Content-Type"] = "*/*";
 
 export default instance;

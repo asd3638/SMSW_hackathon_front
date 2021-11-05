@@ -1,17 +1,22 @@
 import instance from "../lib/api/instance";
 import { AUTH_USER } from "./types";
 
-function auth() {
-  //최초로 로그인 시도한 경오
-  //로그인 안 한 유저가 접속 한 경우
-  const request = instance
-    .get("/api/user", localStorage.getItem("token"))
-    .then((response) => response.data);
-
+function Auth(accessToken) {
+  // state selector로 userData 받아와서 get 보내기
+  if (accessToken) {
+    const request = instance
+      .get(`/api/user/${accessToken}`)
+      .then((response) => response.data);
+    console.log(request);
+    return {
+      type: AUTH_USER,
+      payload: request,
+    };
+  }
   return {
-    type: AUTH_USER,
-    payload: request,
+    type: null,
+    payload: null,
   };
 }
 
-export default auth;
+export default Auth;
