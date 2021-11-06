@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import instance from "../lib/api/instance";
 
-function Header(props) {
-  const user = useSelector((state) => state.user.userData);
+function Header({ currentUser }) {
   const token = localStorage.getItem("token");
 
-  const [currentUser, setCurrentUser] = useState();
-  useEffect(() => {
-    if (user !== undefined) {
-      setCurrentUser(user);
-    }
-  }, [user]);
   const logout = async () => {
-    const response = await instance
+    await instance
       .get(`/api/user/logout/${token}`)
       .then((response) => response.data);
     localStorage.removeItem("token");

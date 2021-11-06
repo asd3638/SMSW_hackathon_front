@@ -8,6 +8,8 @@ import Coupon from "./Coupon";
 
 function MapComp(props) {
   const [store, setStore] = useState([]);
+  const [selectedStore, setSelectedStore] = useState();
+
   const mapStyles = {
     width: "80%",
     height: "80%",
@@ -26,10 +28,11 @@ function MapComp(props) {
 
   const markerClickEvent = (e) => {
     console.log(e);
+    setSelectedStore(e.store);
   };
   return (
     <Container>
-      <Row>
+      <Row style={{ height: "600px" }}>
         <Col>
           <Map
             google={props.google}
@@ -42,7 +45,7 @@ function MapComp(props) {
                 <Marker
                   position={{ lat: value.lat, lng: value.lng }}
                   onClick={markerClickEvent}
-                  name={value.name}
+                  store={value}
                   icon={"http://maps.google.com/mapfiles/ms/icons/blue.png"}
                 />
               );
@@ -51,8 +54,13 @@ function MapComp(props) {
         </Col>
       </Row>
       <Row>
-        <Col style={{ top: "10000px" }}>
-          <StoreDetail />
+        <Col>
+          <StoreDetail store={selectedStore} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Coupon user={props.currentUser} store={selectedStore} />
         </Col>
       </Row>
     </Container>

@@ -2,28 +2,24 @@ import React, { useState, useEffect } from "react";
 import instance from "../lib/api/instance";
 import { Row, Col, Card } from "react-bootstrap";
 
-function Coupon({ userSeq, storeSeq }) {
+function Coupon({ user, store }) {
   const [couponList, setCouponList] = useState([]);
-  const [store, setStore] = useState();
-
+  console.log(user);
+  console.log(store);
   useEffect(() => {
-    const fetchStore = async () => {
-      try {
-        const response = await instance.get(`/api/map/${userSeq}/${storeSeq}`);
-        setStore(response.data.store); // 데이터는 response.data 안에 들어있습니다.
-      } catch (e) {}
-    };
     const fetchCouponList = async () => {
       try {
-        const response = await instance.get(`/api/map/${userSeq}/${storeSeq}`);
-        setCouponList(response.data.coupon); // 데이터는 response.data 안에 들어있습니다.
+        const response = await instance.get(
+          `/api/coupon/${user.id}/${store.id}`
+        );
+        setCouponList(response.data); // 데이터는 response.data 안에 들어있습니다.
       } catch (e) {}
     };
-    fetchStore();
     fetchCouponList();
   }, []);
   return (
     <div>
+      Hello
       <Row xs={1} md={2} className="g-4">
         {couponList.map((coupon, idx) => (
           <Col>
