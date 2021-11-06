@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const instance = axios.create();
-
-instance.defaults.baseURL = "http://localhost:8080/";
-instance.defaults.withCredentials = false;
-instance.defaults.headers["Accesss-Control-Allow-Origin"] = "*";
-instance.defaults.headers["Content-Type"] = "*/*";
+const instance = axios.create({
+  baseURL: "http://localhost:8080/",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 export default instance;

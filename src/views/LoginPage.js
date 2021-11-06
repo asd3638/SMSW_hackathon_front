@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
+import LoginModal from "../components/LoginModal";
 
 function LoginPage() {
-  return <div>This is logined page! 로그인 한 유저만 접속 가능합니다.</div>;
+  const [show, setShow] = useState(false);
+  const showLoginModal = () => {
+    setShow(true);
+  };
+  const closeLoginModal = () => {
+    setShow(false);
+  };
+  return (
+    <div>
+      <Button onClick={showLoginModal}>로그인</Button>
+      <LoginModal show={show} closeLoginModal={closeLoginModal} />
+    </div>
+  );
 }
 
 export default LoginPage;

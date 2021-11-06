@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
+import Hello from "../components/Hello";
+import Map from "../components/Map";
 import { useSelector } from "react-redux";
+import instance from "../lib/api/instance";
 
 function HomePage() {
-  const user = useSelector((state) => state.user.userData);
-  const [currentUser, setCurrentUser] = useState("hello");
-  useEffect(() => {
-    if (user !== undefined) {
-      setCurrentUser(user);
-    }
-  }, [user]);
+  //const user = useSelector((state) => state.user.userData);
+
   return (
     <div>
       <Header />
-      <div>Hello</div>
-      <div>{currentUser.id}</div>
+      <Hello />
+      {/* <div>{currentUser.nickname}</div> */}
+      {/* map */}
+      <Map />
+      {/* store detail */}
+      <div>{}</div>
+      {/* coupon */}
     </div>
   );
 }
