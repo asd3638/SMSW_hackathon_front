@@ -16,6 +16,7 @@ function HomePage() {
       {/* map */}
       <Map />
       {/* store detail */}
+
       <div>{}</div>
       {/* coupon */}
     </div>
