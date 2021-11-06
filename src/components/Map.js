@@ -22,7 +22,6 @@ function MapComp(props) {
       } catch (e) {}
     };
     fetchStore();
-    console.log(store);
   }, []);
 
   const markerClickEvent = (e) => {
@@ -52,7 +51,7 @@ function MapComp(props) {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col style={{ top: "10000px" }}>
           <StoreDetail />
         </Col>
       </Row>

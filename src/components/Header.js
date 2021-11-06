@@ -24,12 +24,12 @@ function Header(props) {
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">숙명</Navbar.Brand>
+          <Navbar.Brand href="/">숙명</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#features">마이페이지</Nav.Link>
-              <Nav.Link href="#pricing">위드숙명</Nav.Link>
+              <Nav.Link href="/mypage">마이페이지</Nav.Link>
+              <Nav.Link href="/store">위드숙명</Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link href="#" onClick={logout}>
