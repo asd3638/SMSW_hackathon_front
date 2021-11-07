@@ -1,16 +1,23 @@
 import React from "react";
-import { Container } from "react-bootstrap";
-import GoogleLoginImg from "../asset/image/google_login.svg";
-import KakaoLoginImg from "../asset/image/kakao_login.svg";
+import { Button } from "react-bootstrap";
 
 function LoginModal() {
   return (
     <div
       className="login_btn"
-      style={{ textAlign: "center", height: "380px", marginTop: "380px" }}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "center",
+        height: "760px",
+        backgroundColor: "#20232a",
+      }}
     >
-      <a href="http://localhost:8080/auth/google">
-        <img src={GoogleLoginImg} alt="googleImg" className="google" />
+      <a href="http://ec2-18-218-203-237.us-east-2.compute.amazonaws.com:8080/auth/google">
+        <Button size="lg" variant="light">
+          학교 구글 계정으로 쿠게더 시작하기
+        </Button>
       </a>
     </div>
   );

@@ -63,13 +63,15 @@ function MapComp(props) {
           ) : null}
         </Col>
       </Row>
-      <Row>
-        {selectedStore ? (
-          <Col>
-            <Coupon user={props.currentUser} selectedStore={selectedStore} />
-          </Col>
-        ) : null}
-      </Row>
+      <div>
+        <Row>
+          {selectedStore ? (
+            <Col>
+              <Coupon user={props.currentUser} selectedStore={selectedStore} />
+            </Col>
+          ) : null}
+        </Row>
+      </div>
     </Container>
   );
 }

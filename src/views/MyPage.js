@@ -13,7 +13,9 @@ function MyPage() {
   const user = useSelector((state) => state.user.userData);
   const [currentUser, setCurrentUser] = useState("hello");
   const [availCoup, setAvailCoup] = useState([]);
+  const [availCoupStore, setAvailCoupStore] = useState([]);
   const [expCoup, setExpCoup] = useState([]);
+  const [expCoupStore, setExpCoupStore] = useState([]);
 
   useEffect(() => {
     const load = async () => {
@@ -28,8 +30,8 @@ function MyPage() {
         const response = await instance.get(
           `/api/coupon/${currentUser.id}/available`
         );
-        setAvailCoup(response.data); // 데이터는 response.data 안에 들어있습니다.
-        console.log(availCoup);
+        setAvailCoup(response.data.coupon); // 데이터는 response.data 안에 들어있습니다.
+        setAvailCoupStore(response.data.store_name);
       } catch (e) {}
     };
     const fetchExpCoup = async () => {
@@ -37,8 +39,8 @@ function MyPage() {
         const response = await instance.get(
           `/api/coupon/${currentUser.id}/expired`
         );
-        setExpCoup(response.data); // 데이터는 response.data 안에 들어있습니다.
-        console.log(expCoup);
+        setExpCoup(response.data.coupon); // 데이터는 response.data 안에 들어있습니다.
+        setExpCoupStore(response.data.store_name);
       } catch (e) {}
     };
     load();
@@ -68,7 +70,7 @@ function MyPage() {
                 marginBottom: "50px",
               }}
             >
-              {availCoup.map((coup) => {
+              {availCoup.map((coup, idx) => {
                 return (
                   <Card style={{ width: "15rem" }}>
                     <Card.Img src={back} />
@@ -83,7 +85,7 @@ function MyPage() {
                               }}
                             >
                               <Card.Title style={{ fontWeight: "bold" }}>
-                                가게명
+                                {availCoupStore[idx]}
                               </Card.Title>
                               <Card.Text></Card.Text>
                               <Card.Text>
@@ -122,7 +124,7 @@ function MyPage() {
                 marginBottom: "50px",
               }}
             >
-              {expCoup.map((coup) => {
+              {expCoup.map((coup, idx) => {
                 return (
                   <Card style={{ width: "15rem" }}>
                     <Card.Img src={back} />
@@ -137,7 +139,7 @@ function MyPage() {
                               }}
                             >
                               <Card.Title style={{ fontWeight: "bold" }}>
-                                가게명
+                                {expCoupStore[idx]}
                               </Card.Title>
                               <Card.Text></Card.Text>
                               <Card.Text>
