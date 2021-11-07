@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import GoogleLoginImg from "../asset/image/google_login.svg";
-import KakaoLoginImg from "../asset/image/kakao_login.svg";
+import GoogleLoginImg from "../../asset/image/google_login.svg";
+import KakaoLoginImg from "../../asset/image/kakao_login.svg";
 
 function LoginModal({ show, closeLoginModal }) {
   return (
