@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Hello from "../components/Hello";
 import Map from "../components/Map";
-import StoreDetail from "../components/StoreDetail";
-import Coupon from "../components/Coupon";
 import { useSelector } from "react-redux";
 
 function HomePage() {
-  //const user = useSelector((state) => state.user.userData);
   const user = useSelector((state) => state.user.userData);
-  const [currentUser, setCurrentUser] = useState("hello");
+  const [currentUser, setCurrentUser] = useState({});
   useEffect(() => {
     const load = async () => {
       try {
@@ -20,6 +17,7 @@ function HomePage() {
     };
     load();
   }, [user]);
+
   return (
     <div>
       <Header currentUser={currentUser} />

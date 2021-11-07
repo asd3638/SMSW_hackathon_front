@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import LoginModal from "../components/LoginModal";
-
+import LoginModal from "../components/modal/LoginModal";
 function LoginPage() {
   const [show, setShow] = useState(false);
   const showLoginModal = () => {

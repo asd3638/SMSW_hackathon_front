@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import instance from "../lib/api/instance";
-import { Container, Row, Col, Card } from "react-bootstrap";
-
-import StoreDetail from "./StoreDetail";
+import { Container, Row, Col } from "react-bootstrap";
 import Coupon from "./Coupon";
+import StoreDetail from "./StoreDetail";
 
 function MapComp(props) {
   const [store, setStore] = useState([]);

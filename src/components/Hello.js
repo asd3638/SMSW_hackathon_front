@@ -1,15 +1,13 @@
 import React from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+
 function Hello({ currentUser }) {
+  console.log(currentUser);
   return (
-    <div>
-      <Container>
-        <Row>
-          {currentUser.nickname} 송이 안녕하세요? 맛없는거 먹으면 짜증나는거
-          알죠?
-        </Row>
-      </Container>
-    </div>
+    <Container>
+      안녕하세요!! {currentUser.nickname}송이!!!!숙명의 자랑 다양한 맛집과
+      특색있는 가게들을 찾아보세요!
+    </Container>
   );
 }
 
