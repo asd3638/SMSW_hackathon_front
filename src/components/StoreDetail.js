@@ -1,34 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Card, Container, Row, Col, Button } from "react-bootstrap";
+import { Card, Container, Row, Col, Fade } from "react-bootstrap";
 import img from "../asset/image/BR2.PNG";
 import coffee from "../asset/image/coffee.png";
 import heart50 from "../asset/image/heart50.png";
 import history from "../asset/image/history.png";
 import diet from "../asset/image/diet.png";
-import back from "../asset/image/coupon.jpg";
-import back2 from "../asset/image/img.jpg";
 
 function StoreDetail({ selectedStore }) {
+  const [open, setOpen] = useState(false);
   return (
     <div>
       클릭한 마커에 해당하는 가게 정보
       {selectedStore ? (
-        <Card className="bg-dark text-white" style={{}}>
-          <Card.Img
-            src={img}
-            alt="Card image"
-            style={
-              {
-                // marginLeft: "2rem",
-                // marginRight: "2rem",
-                // marginTop: "15px",
-                // height: "280px",
-                // wordBreak: "break-all",
-                // padding: "10px",
-              }
-            }
-          />
+        <Card className="bg-dark text-white">
+          <Card.Img src={img} alt="Card image" />
           <Card.ImgOverlay>
             <Card.Title>
               <div style={{ fontSize: "4vw", fontWeight: "bold" }}>
@@ -45,7 +31,19 @@ function StoreDetail({ selectedStore }) {
               <Container>
                 <Row>
                   <Col>
-                    <Card.Img src={coffee} />
+                    <Card.Img
+                      src={coffee}
+                      onClick={() => setOpen(!open)}
+                      aria-controls="example-fade-text"
+                    />
+                    <Fade in={open}>
+                      <div id="example-fade-text">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high
+                        life accusamus terry richardson ad squid. Nihil anim
+                        keffiyeh helvetica, craft beer labore wes anderson cred
+                        nesciunt sapiente ea proident.
+                      </div>
+                    </Fade>
                   </Col>
                   <Col>
                     <Card.Img src={heart50} />

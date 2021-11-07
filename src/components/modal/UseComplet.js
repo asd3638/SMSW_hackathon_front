@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import auth from "../../hoc/auth";
 import "./modal.css";
 
 function UseComplet({ show2 }) {

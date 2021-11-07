@@ -9,24 +9,28 @@ import history from "../asset/image/history.png";
 import diet from "../asset/image/diet.png";
 import back from "../asset/image/coupon.jpg";
 import back2 from "../asset/image/img.jpg";
-function Coupon({ user, selectedStore }) {
+function Coupon(props) {
   const [couponList, setCouponList] = useState([]);
-  console.log("Hello" + user);
   useEffect(() => {
     const fetchCouponList = async () => {
       try {
         const response = await instance.get(
-          `/api/coupon/${user.id}/${selectedStore.id}`
+          `/api/coupon/${props.user.id}/${props.selectedStore.id}`
         );
         setCouponList(response.data.coupon); // 데이터는 response.data 안에 들어있습니다.
-        console.log(couponList);
       } catch (e) {}
     };
     fetchCouponList();
-  }, [selectedStore]);
+  }, [props.selectedStore]);
+
+  const handleUse = async (id) => {
+    const result = await instance.delete(`/api/coupon/${id}`).then((res) => {
+      return res.data;
+    });
+    window.location.replace("/");
+  };
   return (
     <div>
-      클릭한 마커에 해당하는 쿠폰 정보 시발
       <Row xs={1} md={2} className="g-4">
         {couponList.map((coupon, idx) => (
           <Card style={{ width: "18rem" }}>
@@ -42,7 +46,7 @@ function Coupon({ user, selectedStore }) {
                       }}
                     >
                       <Card.Title style={{ fontWeight: "bold" }}>
-                        {selectedStore.name}
+                        {props.selectedStore.name}
                       </Card.Title>
                       <Card.Text></Card.Text>
                       <Card.Text>
@@ -65,8 +69,14 @@ function Coupon({ user, selectedStore }) {
                           marginTop: "2px",
                         }}
                       >
-                        <Button variant="warning" size="lg">
-                          쿠폰 확인
+                        <Button
+                          variant="warning"
+                          size="sm"
+                          onClick={() => {
+                            handleUse(coupon.id);
+                          }}
+                        >
+                          쿠폰 사용하기
                         </Button>
                       </div>
                     </Card.Body>
