@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import auth from "./hoc/auth";
 import login from "./hoc/login";
+import MyPage from "./views/MyPage";
 
 //in-folder component
 
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/check" component={login()} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/store" component={auth(StorePage, null)} />
+          <Route exact path="/mypage" component={auth(MyPage, null)} />
         </Switch>
       </BrowserRouter>
     </div>

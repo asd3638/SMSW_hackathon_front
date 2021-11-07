@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import instance from "../lib/api/instance";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 
 import StoreDetail from "./StoreDetail";
 import Coupon from "./Coupon";
@@ -19,17 +19,19 @@ function MapComp(props) {
   useEffect(() => {
     const fetchStore = async () => {
       try {
-        const response = await instance.get("/api/store");
-        setStore(response.data); // 데이터는 response.data 안에 들어있습니다.
+        const response = await instance.get(
+          `/api/store/${props.currentUser.id}`
+        );
+        setStore(response.data.store); // 데이터는 response.data 안에 들어있습니다.
       } catch (e) {}
     };
     fetchStore();
   }, []);
 
   const markerClickEvent = (e) => {
-    console.log(e);
     setSelectedStore(e.store);
   };
+
   return (
     <Container>
       <Row style={{ height: "600px" }}>
@@ -55,12 +57,14 @@ function MapComp(props) {
       </Row>
       <Row>
         <Col>
-          <StoreDetail store={selectedStore} />
+          {selectedStore ? <StoreDetail selectedStore={selectedStore} /> : null}
         </Col>
       </Row>
       <Row>
         <Col>
-          <Coupon user={props.currentUser} store={selectedStore} />
+          {selectedStore ? (
+            <Coupon user={props.currentUser} selectedStore={selectedStore} />
+          ) : null}
         </Col>
       </Row>
     </Container>

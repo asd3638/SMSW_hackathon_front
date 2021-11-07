@@ -2,30 +2,30 @@ import React, { useState, useEffect } from "react";
 import instance from "../lib/api/instance";
 import { Row, Col, Card } from "react-bootstrap";
 
-function Coupon({ user, store }) {
+function Coupon({ user, selectedStore }) {
   const [couponList, setCouponList] = useState([]);
-  console.log(user);
-  console.log(store);
+
   useEffect(() => {
     const fetchCouponList = async () => {
       try {
         const response = await instance.get(
-          `/api/coupon/${user.id}/${store.id}`
+          `/api/coupon/${user.id}/${selectedStore.id}`
         );
-        setCouponList(response.data); // 데이터는 response.data 안에 들어있습니다.
+        setCouponList(response.data.coupon); // 데이터는 response.data 안에 들어있습니다.
+        console.log(couponList);
       } catch (e) {}
     };
     fetchCouponList();
-  }, []);
+  }, [selectedStore]);
   return (
     <div>
-      Hello
+      클릭한 마커에 해당하는 쿠폰 정보
       <Row xs={1} md={2} className="g-4">
         {couponList.map((coupon, idx) => (
           <Col>
             <Card>
               <Card.Body>
-                <Card.Title>{store.name}</Card.Title>
+                <Card.Title>{selectedStore.name}</Card.Title>
                 <Card.Text>
                   유효기간
                   <br />
