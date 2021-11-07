@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Card, Container, Row, Col, Fade } from "react-bootstrap";
-import img from "../asset/image/BR2.PNG";
-import coffee from "../asset/image/coffee.png";
 import heart50 from "../asset/image/heart50.png";
 import history from "../asset/image/history.png";
 import diet from "../asset/image/diet.png";
+import coffee from "../asset/image/coffee.png";
 
 function StoreDetail({ selectedStore }) {
   const [open, setOpen] = useState(false);
+  var bg_name = selectedStore.img;
+  var bg_src = `https://iljipractice.s3.ap-northeast-2.amazonaws.com/background/${bg_name}.png`;
+
   return (
     <div>
       클릭한 마커에 해당하는 가게 정보
       {selectedStore ? (
         <Card className="bg-dark text-white">
-          <Card.Img src={img} alt="Card image" />
+          <Card.Img src={bg_src} alt="Card image" />
           <Card.ImgOverlay>
             <Card.Title>
               <div style={{ fontSize: "4vw", fontWeight: "bold" }}>
@@ -24,26 +26,14 @@ function StoreDetail({ selectedStore }) {
             <div
               style={{
                 width: "400px",
-                marginTop: "30px",
+                marginTop: "20px",
                 marginBottom: "30px",
               }}
             >
               <Container>
                 <Row>
                   <Col>
-                    <Card.Img
-                      src={coffee}
-                      onClick={() => setOpen(!open)}
-                      aria-controls="example-fade-text"
-                    />
-                    <Fade in={open}>
-                      <div id="example-fade-text">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high
-                        life accusamus terry richardson ad squid. Nihil anim
-                        keffiyeh helvetica, craft beer labore wes anderson cred
-                        nesciunt sapiente ea proident.
-                      </div>
-                    </Fade>
+                    <Card.Img src={coffee} />
                   </Col>
                   <Col>
                     <Card.Img src={heart50} />

@@ -39,7 +39,7 @@ function MapComp(props) {
             google={props.google}
             zoom={16}
             style={mapStyles}
-            initialCenter={{ lat: 37.54746, lng: 126.96458 }}
+            initialCenter={{ lat: 37.54497330465029, lng: 126.96671543481764 }}
           >
             {store.map((value) => {
               return (

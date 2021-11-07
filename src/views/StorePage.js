@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import instance from "../lib/api/instance";
 import StoreDetail from "../components/StoreDetail";
+import Header from "../components/Header";
 function StorePage() {
   const user = useSelector((state) => state.user.userData);
   const [storeList, setStoreList] = useState([]);
@@ -48,16 +49,18 @@ function StorePage() {
         const response = await instance
           .post(`/api/symbol`, { symbol_type })
           .then((res) => {
+            console.log(res.data);
             return res.data;
           });
-        setClickedSymbolList(response);
+        setStoreList(response);
       } catch (e) {}
     };
     searchSymbolList();
   };
 
   return (
-    <Container>
+    <div>
+      <Header />
       <Container>
         {symbolList.map((symbol, idx) => (
           <Row>
@@ -71,11 +74,11 @@ function StorePage() {
             <Col>bbbbbbbbbbbbbb</Col>
           </Row>
         ))}
+        {storeList.map((store, idx) => {
+          return <StoreDetail selectedStore={store} />;
+        })}
       </Container>
-      {storeList.map((store, idx) => {
-        return <StoreDetail selectedStore={store} />;
-      })}
-    </Container>
+    </div>
   );
 }
 
