@@ -56,7 +56,12 @@ function MapComp(props) {
       </Row>
       <Row>
         <Col>
-          {selectedStore ? <StoreDetail selectedStore={selectedStore} /> : null}
+          {selectedStore ? (
+            <StoreDetail
+              user={props.currentUser}
+              selectedStore={selectedStore}
+            />
+          ) : null}
         </Col>
       </Row>
       <Row>

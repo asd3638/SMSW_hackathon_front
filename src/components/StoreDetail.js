@@ -5,22 +5,35 @@ import heart50 from "../asset/image/heart50.png";
 import history from "../asset/image/history.png";
 import diet from "../asset/image/diet.png";
 import coffee from "../asset/image/coffee.png";
+import instance from "../lib/api/instance";
 
-function StoreDetail({ selectedStore }) {
-  const [open, setOpen] = useState(false);
-  var bg_name = selectedStore.img;
-  var bg_src = `https://iljipractice.s3.ap-northeast-2.amazonaws.com/background/${bg_name}.png`;
+function StoreDetail(props) {
+  const [symboleList, setSymboleList] = useState([]);
+  useEffect(() => {
+    const fetchSymboleList = async () => {
+      try {
+        const response = await instance.get(
+          `/api/coupon/${props.user.id}/${props.selectedStore.id}`
+        );
+        setSymboleList(response.data.symbol); // 데이터는 response.data 안에 들어있습니다.
+      } catch (e) {}
+    };
+    fetchSymboleList();
+  }, []);
+
+  let bg_name = props.selectedStore.img;
+  let bg_src = `https://iljipractice.s3.ap-northeast-2.amazonaws.com/background/${bg_name}.png`;
 
   return (
     <div>
-      클릭한 마커에 해당하는 가게 정보
-      {selectedStore ? (
+      가게정보
+      {props.selectedStore ? (
         <Card className="bg-dark text-white">
           <Card.Img src={bg_src} alt="Card image" />
           <Card.ImgOverlay>
             <Card.Title>
               <div style={{ fontSize: "4vw", fontWeight: "bold" }}>
-                {selectedStore.name}
+                {props.selectedStore.name}
               </div>
             </Card.Title>
             <div
@@ -32,28 +45,17 @@ function StoreDetail({ selectedStore }) {
             >
               <Container>
                 <Row>
-                  <Col>
-                    <Card.Img src={coffee} />
-                  </Col>
-                  <Col>
-                    <Card.Img src={heart50} />
-                  </Col>
-                  <Col>
-                    <Card.Img src={history} />
-                  </Col>
-                  <Col>
-                    <Card.Img src={diet} />
-                  </Col>
-                  <Col>
-                    <Card.Img src={null} />
-                  </Col>
-                  <Col>
-                    <Card.Img src={null} />
-                  </Col>
+                  {symboleList.map((symbol, idx) => {
+                    return (
+                      <Col>
+                        <Card.Img src={symbol.symbol_type} />
+                      </Col>
+                    );
+                  })}
                 </Row>
               </Container>
             </div>
-            <Card.Text>{selectedStore.content}</Card.Text>
+            <Card.Text>{props.selectedStore.content}</Card.Text>
           </Card.ImgOverlay>
         </Card>
       ) : null}
