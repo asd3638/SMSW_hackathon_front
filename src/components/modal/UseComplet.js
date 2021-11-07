@@ -2,19 +2,17 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "./modal.css";
 
-function UseComplet({ show2 }) {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+function UseComplet({ show }) {
+  const [showp, setShowp] = useState(show);
+  const handleClose = () => {
+    setShowp(false);
+  };
   return (
     <>
       <div class="modal_">
         <Modal
           size="sm"
-          show={show2}
-          onHide={handleClose}
+          show={showp}
           animation={false}
           aria-labelledby="example-modal-sizes-title-sm"
         >

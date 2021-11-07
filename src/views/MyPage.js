@@ -2,17 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import Hello from "../components/Hello";
-import {
-  Form,
-  Row,
-  Col,
-  InputGroup,
-  FormControl,
-  Button,
-  Tabs,
-  Tab,
-  Container,
-} from "react-bootstrap";
+import Coupon from "../components/Coupon";
+import back2 from "../asset/image/img.jpg";
+import back from "../asset/image/back2.png";
+
+import { Row, Col, Tabs, Tab, Container, Card } from "react-bootstrap";
 import instance from "../lib/api/instance";
 
 function MyPage() {
@@ -50,78 +44,18 @@ function MyPage() {
     load();
     fetchAvailCoup();
     fetchExpCoup();
-  }, [user]);
+  }, [user, availCoup]);
   return (
     <div>
       <Header currentUser={currentUser} />
       <Hello currentUser={currentUser} />
-      <Form>
-        <Container>
-          <Row className="align-items-center">
-            <Col xs="auto">
-              <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
-                search
-              </Form.Label>
-              <InputGroup className="mb-2">
-                <InputGroup.Text>
-                  <i class="fas fa-search"></i>
-                </InputGroup.Text>
-                <FormControl
-                  id="inlineFormInputGroup"
-                  placeholder="가게 정보를 입력해주세요"
-                />
-              </InputGroup>
-            </Col>
-            <Col xs="auto">
-              <Button type="submit" className="mb-2" variant="dark">
-                검색하기
-              </Button>
-            </Col>
-          </Row>
-          <Row
-            xs={1}
-            md={5}
-            style={{
-              marginLeft: "50px",
-              marginTop: "50px",
-              marginRight: "50px",
-              marginBottom: "50px",
-            }}
-          >
-            {availCoup.map((coup) => {
-              return (
-                <Col
-                  style={{
-                    marginBottom: "25px",
-                    display: "flex",
-                    width: "270px",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  {/* <CardView study={study} id={props.userId} isMyPage={true} /> */}
-                  coup.id
-                </Col>
-              );
-            })}
-          </Row>
-        </Container>
-      </Form>
-      <Container
-        style={{
-          width: "auto",
-          display: "block",
-          marginLeft: "50px",
-          marginTop: "70px",
-          marginRight: "50px",
-          border: "none",
-          textAlign: "center",
-        }}
-      >
+
+      <Container>
         <Tabs
           defaultActiveKey="available"
           id="uncontrolled-tab-example"
           className="mb-3"
-          style={{ borderColor: "grey", width: "800px" }}
+          style={{ borderColor: "grey" }}
         >
           <Tab eventKey="available" title="사용 가능한 쿠폰">
             <Row
@@ -136,22 +70,43 @@ function MyPage() {
             >
               {availCoup.map((coup) => {
                 return (
-                  <Col
-                    style={{
-                      marginBottom: "25px",
-                      display: "flex",
-                      width: "270px",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    {/* <CardView
-                      study={study}
-                      id={props.userId}
-                      isMyPage={props.isMyPage}
-                      isHeart={true}
-                    /> */}
-                    coup.id
-                  </Col>
+                  <Card style={{ width: "15rem" }}>
+                    <Card.Img src={back} />
+                    <Card.ImgOverlay>
+                      <Card.Body style={{ opacity: "0.9" }}>
+                        <Card>
+                          <Card.Img src={back2} />
+                          <Card.ImgOverlay>
+                            <Card.Body
+                              style={{
+                                textAlign: "center",
+                              }}
+                            >
+                              <Card.Title style={{ fontWeight: "bold" }}>
+                                가게명
+                              </Card.Title>
+                              <Card.Text></Card.Text>
+                              <Card.Text>
+                                <div style={{ fontSize: "1rem" }}>제공내역</div>
+                                <div style={{ fontSize: "2rem" }}>
+                                  {coup.content}
+                                </div>
+                              </Card.Text>
+                              <Card.Text>
+                                <div style={{ fontSize: "1rem", color: "red" }}>
+                                  유효기한
+                                </div>
+                                <div style={{ fontSize: "1.2rem" }}>
+                                  {coup.end_date.substring(0, 10)}
+                                </div>
+                              </Card.Text>
+                            </Card.Body>
+                          </Card.ImgOverlay>
+                        </Card>
+                        <Card.Text></Card.Text>
+                      </Card.Body>
+                    </Card.ImgOverlay>
+                  </Card>
                 );
               })}
             </Row>
@@ -169,17 +124,43 @@ function MyPage() {
             >
               {expCoup.map((coup) => {
                 return (
-                  <Col
-                    style={{
-                      marginBottom: "25px",
-                      display: "flex",
-                      width: "270px",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    {/* <CardView study={study} id={props.userId} isMyPage={true} /> */}
-                    coup.id
-                  </Col>
+                  <Card style={{ width: "15rem" }}>
+                    <Card.Img src={back} />
+                    <Card.ImgOverlay>
+                      <Card.Body style={{ opacity: "0.9" }}>
+                        <Card>
+                          <Card.Img src={back2} />
+                          <Card.ImgOverlay>
+                            <Card.Body
+                              style={{
+                                textAlign: "center",
+                              }}
+                            >
+                              <Card.Title style={{ fontWeight: "bold" }}>
+                                가게명
+                              </Card.Title>
+                              <Card.Text></Card.Text>
+                              <Card.Text>
+                                <div style={{ fontSize: "1rem" }}>제공내역</div>
+                                <div style={{ fontSize: "2rem" }}>
+                                  {coup.content}
+                                </div>
+                              </Card.Text>
+                              <Card.Text>
+                                <div style={{ fontSize: "1rem", color: "red" }}>
+                                  유효기한
+                                </div>
+                                <div style={{ fontSize: "1.2rem" }}>
+                                  {coup.end_date.substring(0, 10)}
+                                </div>
+                              </Card.Text>
+                            </Card.Body>
+                          </Card.ImgOverlay>
+                        </Card>
+                        <Card.Text></Card.Text>
+                      </Card.Body>
+                    </Card.ImgOverlay>
+                  </Card>
                 );
               })}
             </Row>

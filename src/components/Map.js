@@ -10,9 +10,8 @@ function MapComp(props) {
   const [selectedStore, setSelectedStore] = useState();
 
   const mapStyles = {
-    width: "80%",
-    height: "80%",
-    border: "solid",
+    width: "85%",
+    height: "85%",
   };
 
   useEffect(() => {
@@ -55,7 +54,7 @@ function MapComp(props) {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col style={{ textAlign: "-webkit-center", marginTop: "150px" }}>
           {selectedStore ? (
             <StoreDetail
               user={props.currentUser}
@@ -65,11 +64,11 @@ function MapComp(props) {
         </Col>
       </Row>
       <Row>
-        <Col>
-          {selectedStore ? (
+        {selectedStore ? (
+          <Col>
             <Coupon user={props.currentUser} selectedStore={selectedStore} />
-          ) : null}
-        </Col>
+          </Col>
+        ) : null}
       </Row>
     </Container>
   );

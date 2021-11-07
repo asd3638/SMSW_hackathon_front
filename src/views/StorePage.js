@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import instance from "../lib/api/instance";
 import StoreDetail from "../components/StoreDetail";
 import Header from "../components/Header";
+import Hello from "../components/Hello";
 function StorePage() {
   const user = useSelector((state) => state.user.userData);
   const [storeList, setStoreList] = useState([]);
@@ -11,7 +12,6 @@ function StorePage() {
   const [clickedSymbolList, setClickedSymbolList] = useState([]);
 
   const [currentUser, setCurrentUser] = useState({});
-  const list = [1, 2, 3];
   useEffect(() => {
     const load = async () => {
       try {
@@ -61,22 +61,47 @@ function StorePage() {
   return (
     <div>
       <Header />
-      <Container>
-        {symbolList.map((symbol, idx) => (
-          <Row>
-            <Col
-              onClick={() => {
-                symbolClick(symbol.symbol_type);
-              }}
-            >
-              a
-            </Col>
-            <Col>bbbbbbbbbbbbbb</Col>
-          </Row>
-        ))}
-        {storeList.map((store, idx) => {
-          return <StoreDetail selectedStore={store} />;
-        })}
+      <Hello currentUser={currentUser} />
+      <Container style={{ marginTop: "20px" }}>
+        <div style={{ display: "flex" }}>
+          <div style={{ width: "50%" }}>
+            {symbolList.map((symbol) => {
+              var temp_src = `https://iljipractice.s3.ap-northeast-2.amazonaws.com/symbol/${symbol.symbol_type}.png`;
+              return (
+                <div
+                  style={{
+                    height: "50px",
+                    marginTop: "10px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <Container fluid>
+                    <Row style={{ height: "50px" }}>
+                      <Col xs={4} md={1} style={{ width: "70px" }}>
+                        <Image
+                          src={temp_src}
+                          rounded
+                          style={{ position: "absolute", width: "50px" }}
+                          onClick={() => {
+                            symbolClick(symbol.symbol_type);
+                          }}
+                        />
+                      </Col>
+                      <Col style={{ alignSelf: "center" }}>
+                        <div>{symbol.content}</div>
+                      </Col>
+                    </Row>
+                  </Container>
+                </div>
+              );
+            })}
+          </div>
+          <div className="stores">
+            {storeList.map((store) => {
+              return <StoreDetail user={currentUser} selectedStore={store} />;
+            })}
+          </div>
+        </div>
       </Container>
     </div>
   );

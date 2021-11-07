@@ -9,6 +9,7 @@ import Reducer from "./_reducers";
 
 //infolder import
 import "./asset/font/font.css";
+import "./index.css";
 const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,
   ReduxThunk
