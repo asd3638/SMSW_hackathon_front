@@ -16,7 +16,7 @@ function Header({ currentUser }) {
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">숙명</Navbar.Brand>
+          <Navbar.Brand href="/">쿠게더</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">

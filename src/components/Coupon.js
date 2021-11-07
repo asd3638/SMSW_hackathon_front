@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import instance from "../lib/api/instance";
-import { useSelector } from "react-redux";
-import { Row, Card, Container, Col, Button } from "react-bootstrap";
-import img from "../asset/image/BR2.PNG";
-import coffee from "../asset/image/coffee.png";
-import heart50 from "../asset/image/heart50.png";
-import history from "../asset/image/history.png";
-import diet from "../asset/image/diet.png";
-import back from "../asset/image/coupon.jpg";
+import { Row, Card, Button } from "react-bootstrap";
+import back from "../asset/image/back2.png";
 import back2 from "../asset/image/img.jpg";
+import UseComplet from "./modal/UseComplet";
+
 function Coupon(props) {
   const [couponList, setCouponList] = useState([]);
+
   useEffect(() => {
     const fetchCouponList = async () => {
       try {
@@ -24,9 +21,10 @@ function Coupon(props) {
   }, [props.selectedStore]);
 
   const handleUse = async (id) => {
-    const result = await instance.delete(`/api/coupon/${id}`).then((res) => {
+    await instance.delete(`/api/coupon/${id}`).then((res) => {
       return res.data;
     });
+    alert("사용이 완료되었습니다!");
     window.location.replace("/");
   };
   return (
@@ -58,7 +56,7 @@ function Coupon(props) {
                           유효기한
                         </div>
                         <div style={{ fontSize: "1.2rem" }}>
-                          {coupon.end_date}
+                          {coupon.end_date.substring(0, 10)}
                         </div>
                       </Card.Text>
                       <div

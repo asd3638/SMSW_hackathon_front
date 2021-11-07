@@ -10,9 +10,8 @@ function MapComp(props) {
   const [selectedStore, setSelectedStore] = useState();
 
   const mapStyles = {
-    width: "80%",
-    height: "80%",
-    border: "solid",
+    width: "85%",
+    height: "85%",
   };
 
   useEffect(() => {
@@ -39,7 +38,7 @@ function MapComp(props) {
             google={props.google}
             zoom={16}
             style={mapStyles}
-            initialCenter={{ lat: 37.54746, lng: 126.96458 }}
+            initialCenter={{ lat: 37.54497330465029, lng: 126.96671543481764 }}
           >
             {store.map((value) => {
               return (
@@ -55,17 +54,24 @@ function MapComp(props) {
         </Col>
       </Row>
       <Row>
-        <Col>
-          {selectedStore ? <StoreDetail selectedStore={selectedStore} /> : null}
-        </Col>
-      </Row>
-      <Row>
-        <Col>
+        <Col style={{ textAlign: "-webkit-center", marginTop: "150px" }}>
           {selectedStore ? (
-            <Coupon user={props.currentUser} selectedStore={selectedStore} />
+            <StoreDetail
+              user={props.currentUser}
+              selectedStore={selectedStore}
+            />
           ) : null}
         </Col>
       </Row>
+      <div>
+        <Row>
+          {selectedStore ? (
+            <Col>
+              <Coupon user={props.currentUser} selectedStore={selectedStore} />
+            </Col>
+          ) : null}
+        </Row>
+      </div>
     </Container>
   );
 }

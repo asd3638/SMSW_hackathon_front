@@ -14,7 +14,6 @@ export default function () {
     console.log(token);
     localStorage.setItem("token", token);
     const dispatch = useDispatch();
-    // 여기선 막아서 다른 페이지로 들어가게 한다.
     if (!token) {
       console.log("로그인 실패");
       window.location.replace("/login");
