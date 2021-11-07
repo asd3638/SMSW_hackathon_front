@@ -3,12 +3,14 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import instance from "../lib/api/instance";
 import StoreDetail from "../components/StoreDetail";
-import Symbol from "../components/Symbol";
 function StorePage() {
   const user = useSelector((state) => state.user.userData);
   const [storeList, setStoreList] = useState([]);
   const [symbolList, setSymbolList] = useState([]);
+  const [clickedSymbolList, setClickedSymbolList] = useState([]);
+
   const [currentUser, setCurrentUser] = useState({});
+  const list = [1, 2, 3];
   useEffect(() => {
     const load = async () => {
       try {
@@ -39,13 +41,40 @@ function StorePage() {
     fetchSymbolList();
     load();
   }, [user]);
+  const symbolClick = (symbol_type) => {
+    const searchSymbolList = async () => {
+      try {
+        console.log(symbol_type);
+        const response = await instance
+          .post(`/api/symbol`, { symbol_type })
+          .then((res) => {
+            return res.data;
+          });
+        setClickedSymbolList(response);
+      } catch (e) {}
+    };
+    searchSymbolList();
+  };
 
   return (
     <Container>
-      <Symbol />
-      {storeList.map((store, idx) => (
-        <StoreDetail selectedStore={store} />
-      ))}
+      <Container>
+        {symbolList.map((symbol, idx) => (
+          <Row>
+            <Col
+              onClick={() => {
+                symbolClick(symbol.symbol_type);
+              }}
+            >
+              a
+            </Col>
+            <Col>bbbbbbbbbbbbbb</Col>
+          </Row>
+        ))}
+      </Container>
+      {storeList.map((store, idx) => {
+        return <StoreDetail selectedStore={store} />;
+      })}
     </Container>
   );
 }

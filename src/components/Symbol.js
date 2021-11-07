@@ -1,13 +1,15 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-function Symbol() {
+function Symbol({ symbolList }) {
   return (
     <Container>
-      <Row>
-        <Col style={{ width: "20px" }}>a</Col>
-        <Col>bbbbbbbbbbbbbb</Col>
-      </Row>
+      {symbolList.map((symbol, idx) => (
+        <Row>
+          <Col style={{ width: "20px" }}>a</Col>
+          <Col>bbbbbbbbbbbbbb</Col>
+        </Row>
+      ))}
     </Container>
   );
 }
