@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Auth from "../_actions/user_action";
-import HomePage from "../views/HomePage";
+import LandingPage from "../views/LandingPage";
 
 export default function (SpecificComponent, option, adminRoute = null) {
   //null    =>  아무나 출입이 가능한 페이지
@@ -17,7 +17,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
     useEffect(() => {
       if (!token) {
         console.log("error");
-        return <HomePage />;
+        return <LandingPage />;
       }
       dispatch(Auth(token)).then((response) => {
         console.log("not error");
